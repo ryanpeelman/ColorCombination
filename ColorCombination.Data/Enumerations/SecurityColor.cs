@@ -1,5 +1,5 @@
 ﻿
-namespace ColorCombination.Enumerations
+namespace ColorCombination.Data.Enumerations
 {
     public enum SecurityColor
     {

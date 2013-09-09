@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{51B72E9A-F0C9-44F2-9BA1-9BBC8CD4B8FB}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{F5516BED-7F3B-4A4F-97EE-CFE4DF5B332C}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ColorCombination</RootNamespace>
-    <AssemblyName>ColorCombination</AssemblyName>
+    <RootNamespace>ColorCombination.Data</RootNamespace>
+    <AssemblyName>ColorCombination.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,18 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Entities\Chip.cs" />
+    <Compile Include="Entities\Marker.cs" />
+    <Compile Include="Enumerations\SecurityColor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SecuritySystem.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ColorCombination.Data\ColorCombination.Data.csproj">
-      <Project>{f5516bed-7f3b-4a4f-97ee-cfe4df5b332c}</Project>
-      <Name>ColorCombination.Data</Name>
-    </ProjectReference>
+    <Compile Include="Scenarios\Example1DataScenario.cs" />
+    <Compile Include="Scenarios\Example2DataScenario.cs" />
+    <Compile Include="Scenarios\Example3DataScenario.cs" />
+    <Compile Include="Scenarios\SecuritySystemDataScenario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

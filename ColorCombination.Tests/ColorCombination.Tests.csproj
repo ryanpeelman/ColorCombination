@@ -52,10 +52,14 @@
   <ItemGroup>
     <Compile Include="BaseAssumptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scenarios\SecuritySystemDataScenario.cs" />
     <Compile Include="SecuritySystemTests.cs" />
+    <Compile Include="ProvidedExamples.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ColorCombination.Data\ColorCombination.Data.csproj">
+      <Project>{f5516bed-7f3b-4a4f-97ee-cfe4df5b332c}</Project>
+      <Name>ColorCombination.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ColorCombination\ColorCombination.csproj">
       <Project>{51b72e9a-f0c9-44f2-9ba1-9bbc8cd4b8fb}</Project>
       <Name>ColorCombination</Name>

@@ -1,6 +1,6 @@
-﻿using ColorCombination.Enumerations;
+﻿using ColorCombination.Data.Enumerations;
 
-namespace ColorCombination.Entities
+namespace ColorCombination.Data.Entities
 {
     public class Chip
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using ColorCombination.Entities;
+using ColorCombination.Data.Entities;
 
-namespace ColorCombination.Tests.Scenarios
+namespace ColorCombination.Data.Scenarios
 {
     public interface SecuritySystemDataScenario
     {

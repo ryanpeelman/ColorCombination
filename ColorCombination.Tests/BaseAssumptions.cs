@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using ColorCombination.Entities;
-using ColorCombination.Enumerations;
+using ColorCombination.Data.Entities;
+using ColorCombination.Data.Enumerations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ColorCombination.Tests
