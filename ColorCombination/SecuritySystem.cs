@@ -26,6 +26,12 @@ namespace ColorCombination
             if (chips == null || !chips.Any())
                 return false;
 
+            if (!chips.Any(x => x.Left == _leftMarker.Color))
+                return false;
+
+            if (!chips.Any(x => x.Right == _rightMarker.Color))
+                return false;
+            
             return true;
         }
     }
