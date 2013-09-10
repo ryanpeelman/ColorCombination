@@ -31,6 +31,8 @@ namespace ColorCombination
 
             if (!chips.Any(x => x.Right == _rightMarker.Color))
                 return false;
+
+
             
             return true;
         }
