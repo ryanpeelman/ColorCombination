@@ -4,6 +4,7 @@ using System.Text;
 using ColorCombination.Data.Entities;
 using ColorCombination.Data.Enumerations;
 using ColorCombination.Services;
+using ColorCombination.Services.Interfaces;
 
 namespace ColorCombination
 {
@@ -11,15 +12,15 @@ namespace ColorCombination
     {
         private SecurityColor _beginningMarkerColor;
         private SecurityColor _endMarkerColor;
-        private ChipChainBuilder _chipChainBuilder;
+        private IBuildChipChains _chipChainBuilder;
 
-        public string UnlockSequence { get; private set; }
+        public ChipChain FoundUnlockSequence { get; private set; }
 
         public SecuritySystem(SecurityColor beginningMarkerColor, SecurityColor endMarkerColor)
         {
             _beginningMarkerColor = beginningMarkerColor;
             _endMarkerColor = endMarkerColor;
-            _chipChainBuilder = new ChipChainBuilder();
+            _chipChainBuilder = ServiceContainer.Instance.GetService<IBuildChipChains>();
         }
 
         public bool CanBeUnlocked(List<Chip> chips)
@@ -27,34 +28,39 @@ namespace ColorCombination
             if (chips == null || !chips.Any())
                 return false;
 
-            if (!chips.Any(x => x.Left == _beginningMarkerColor))
+            if (!chips.Any(x => x.LeftColor == _beginningMarkerColor))
                 return false;
 
-            if (!chips.Any(x => x.Right == _endMarkerColor))
+            if (!chips.Any(x => x.RightColor == _endMarkerColor))
                 return false;
 
-            List<List<Chip>> chains = new List<List<Chip>>();
-            foreach (Chip validHeadChip in chips.Where(c => c.Left == _beginningMarkerColor))
-            {
-                List<Chip> proxyChips = new List<Chip>(chips);
-                proxyChips.Remove(validHeadChip);
+            if (_chipChainBuilder == null)
+                return false;
 
-                List<ChipChain> pchains = _chipChainBuilder.BuildChains(validHeadChip, proxyChips);
-                pchains.ForEach(p => chains.Add(p));
-            }
+            List<ChipChain> chains = _chipChainBuilder.GetChains(_beginningMarkerColor, chips);
 
-            List<Chip> chipSequence = chains.LastOrDefault(x => x.Last().Right == _endMarkerColor);
-            if (chipSequence != null)
+            FoundUnlockSequence = chains.LastOrDefault(x => x.Last().RightColor == _endMarkerColor);
+
+            return FoundUnlockSequence != null;            
+        }
+
+        public string GetUnlockSequenceReadout(List<Chip> chips)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            if (CanBeUnlocked(chips))
             {
-                StringBuilder builder = new StringBuilder();
-                foreach (Chip chip in chipSequence)
+                foreach (Chip chip in FoundUnlockSequence)
                 {
-                    builder.AppendLine(chip.Left + ", " + chip.Right);
+                    builder.AppendLine(chip.ToString());
                 }
-                UnlockSequence = builder.ToString();
             }
-
-            return chipSequence != null;            
+            else
+            {
+                builder.AppendLine("Cannot unlock master panel");
+            }
+            
+            return builder.ToString();
         }
     }
 }

@@ -1,11 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ColorCombination.Data.Entities;
+using ColorCombination.Data.Enumerations;
+using ColorCombination.Services.Interfaces;
 
 namespace ColorCombination.Services
 {
-    public class ChipChainBuilder
+    public class ChipChainBuilder : IBuildChipChains
     {
+        public List<ChipChain> GetChains(SecurityColor beginningColor, List<Chip> chips)
+        {
+            List<ChipChain> chains = new List<ChipChain>();
+            foreach (Chip validHeadChip in chips.Where(c => c.LeftColor == beginningColor))
+            {
+                List<Chip> proxyChips = new List<Chip>(chips);
+                proxyChips.Remove(validHeadChip);
+
+                chains.AddRange(BuildChains(validHeadChip, proxyChips));
+            }
+            return chains;
+        }
+
         public List<ChipChain> BuildChains(Chip headChip, List<Chip> remainingChips) 
         {
             List<ChipChain> chains = new List<ChipChain>();
@@ -17,7 +32,7 @@ namespace ColorCombination.Services
             }
             else
             {
-                List<Chip> nextChips = remainingChips.Where(c => c.Left == possibleChain.Last().Right).ToList();
+                List<Chip> nextChips = remainingChips.Where(c => c.LeftColor == possibleChain.Last().RightColor).ToList();
                 foreach (Chip nextChip in nextChips)
                 {
                     List<Chip> proxyRemainingChips = new List<Chip>(remainingChips);
@@ -42,7 +57,7 @@ namespace ColorCombination.Services
 
         private void BuildChain(List<ChipChain> chains, List<Chip> remainingChips, ChipChain possibleChain)
         {
-            List<Chip> nextChips = remainingChips.Where(c => c.Left == possibleChain.Last().Right).ToList();
+            List<Chip> nextChips = remainingChips.Where(c => c.LeftColor == possibleChain.Last().RightColor).ToList();
             foreach (Chip nextChip in nextChips)
             {
                 List<Chip> proxyRemainingChips = new List<Chip>(remainingChips);

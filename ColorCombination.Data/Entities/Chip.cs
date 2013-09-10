@@ -4,13 +4,18 @@ namespace ColorCombination.Data.Entities
 {
     public class Chip
     {
-        public SecurityColor Left { get; private set; }
-        public SecurityColor Right { get; private set; }
+        public SecurityColor LeftColor { get; private set; }
+        public SecurityColor RightColor { get; private set; }
 
         public Chip(SecurityColor left, SecurityColor right)
         {
-            Left = left;
-            Right = right;
+            LeftColor = left;
+            RightColor = right;
+        }
+
+        public override string ToString()
+        {
+            return LeftColor + ", " + RightColor;
         }
     }
 }

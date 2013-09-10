@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="ChipChainBuilder.cs" />
     <Compile Include="ChipChain.cs" />
+    <Compile Include="Interfaces\IBuildChipChains.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

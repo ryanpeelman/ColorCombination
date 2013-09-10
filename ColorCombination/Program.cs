@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ColorCombination.Data.Entities;
 using ColorCombination.Data.Scenarios;
 
 namespace ColorCombination
@@ -11,6 +12,8 @@ namespace ColorCombination
     {
         public static void Main(string[] args)
         {
+            ServiceLoader.Load();
+
             List<SecuritySystemDataScenario> scenarios = new List<SecuritySystemDataScenario>()
             {
                 new Example1DataScenario(), 
@@ -20,19 +23,8 @@ namespace ColorCombination
 
             foreach (SecuritySystemDataScenario scenario in scenarios)
             {
-                Console.WriteLine(scenario.GetType().Name + ":  ");
-
-                SecuritySystem securitySystem = new SecuritySystem(scenario.BeginningMarkerColor, scenario.EndMarkerColor);
-
-                if (securitySystem.CanBeUnlocked(scenario.Chips))
-                {
-                    Console.WriteLine(securitySystem.UnlockSequence);
-                }
-                else
-                {
-                    Console.WriteLine("Cannot unlock master panel");
-                }
-
+                SecuritySystem securitySystem = new SecuritySystem(scenario.BeginningMarkerColor, scenario.EndMarkerColor);                
+                Console.WriteLine(scenario.GetType().Name + ":  " + Environment.NewLine + securitySystem.GetUnlockSequenceReadout(scenario.Chips));
                 Console.WriteLine();
             }
 
