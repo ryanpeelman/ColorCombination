@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using ColorCombination.Data.Entities;
 using ColorCombination.Data.Enumerations;
 using ColorCombination.Services;
@@ -13,6 +11,7 @@ namespace ColorCombination
     {
         private SecurityColor _beginningMarkerColor;
         private SecurityColor _endMarkerColor;
+        private ChipChainBuilder _chipChainBuilder;
 
         public string UnlockSequence { get; private set; }
 
@@ -20,6 +19,7 @@ namespace ColorCombination
         {
             _beginningMarkerColor = beginningMarkerColor;
             _endMarkerColor = endMarkerColor;
+            _chipChainBuilder = new ChipChainBuilder();
         }
 
         public bool CanBeUnlocked(List<Chip> chips)
@@ -33,15 +33,13 @@ namespace ColorCombination
             if (!chips.Any(x => x.Right == _endMarkerColor))
                 return false;
 
-            ChipChainBuilder chainer = new ChipChainBuilder();
-
             List<List<Chip>> chains = new List<List<Chip>>();
             foreach (Chip validHeadChip in chips.Where(c => c.Left == _beginningMarkerColor))
             {
                 List<Chip> proxyChips = new List<Chip>(chips);
                 proxyChips.Remove(validHeadChip);
 
-                List<ChipChain> pchains = chainer.GetChains(validHeadChip, proxyChips);
+                List<ChipChain> pchains = _chipChainBuilder.BuildChains(validHeadChip, proxyChips);
                 pchains.ForEach(p => chains.Add(p));
             }
 

@@ -6,7 +6,7 @@ namespace ColorCombination.Services
 {
     public class ChipChainBuilder
     {
-        public List<ChipChain> GetChains(Chip headChip, List<Chip> remainingChips) 
+        public List<ChipChain> BuildChains(Chip headChip, List<Chip> remainingChips) 
         {
             List<ChipChain> chains = new List<ChipChain>();
 
@@ -32,7 +32,7 @@ namespace ColorCombination.Services
                     }
                     else
                     {
-                        Recurse(chains, proxyRemainingChips, proxyPossibleChain);                        
+                        BuildChain(chains, proxyRemainingChips, proxyPossibleChain);                        
                     }
                 }
             }
@@ -40,7 +40,7 @@ namespace ColorCombination.Services
             return chains;
         }
 
-        private void Recurse(List<ChipChain> chains, List<Chip> remainingChips, ChipChain possibleChain)
+        private void BuildChain(List<ChipChain> chains, List<Chip> remainingChips, ChipChain possibleChain)
         {
             List<Chip> nextChips = remainingChips.Where(c => c.Left == possibleChain.Last().Right).ToList();
             foreach (Chip nextChip in nextChips)
@@ -57,7 +57,7 @@ namespace ColorCombination.Services
                 }
                 else
                 {
-                    Recurse(chains, proxyRemainingChips, proxyPossibleChain);
+                    BuildChain(chains, proxyRemainingChips, proxyPossibleChain);
                 }
             }
         }
