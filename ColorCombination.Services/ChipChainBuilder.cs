@@ -2,15 +2,15 @@
 using System.Linq;
 using ColorCombination.Data.Entities;
 
-namespace ColorCombination
+namespace ColorCombination.Services
 {
-    public class ChipChainer
+    public class ChipChainBuilder
     {
-        public List<List<Chip>> GetChains(Chip headChip, List<Chip> remainingChips) 
+        public List<ChipChain> GetChains(Chip headChip, List<Chip> remainingChips) 
         {
-            List<List<Chip>> chains = new List<List<Chip>>();
+            List<ChipChain> chains = new List<ChipChain>();
 
-            List<Chip> possibleChain = new List<Chip>() { headChip };
+            ChipChain possibleChain = new ChipChain() { headChip };
             if (!remainingChips.Any())
             {
                 chains.Add(possibleChain);
@@ -21,7 +21,7 @@ namespace ColorCombination
                 foreach (Chip nextChip in nextChips)
                 {
                     List<Chip> proxyRemainingChips = new List<Chip>(remainingChips);
-                    List<Chip> proxyPossibleChain = new List<Chip>(possibleChain);
+                    ChipChain proxyPossibleChain = new ChipChain(possibleChain);
 
                     proxyRemainingChips.Remove(nextChip);
                     proxyPossibleChain.Add(nextChip);
@@ -40,13 +40,13 @@ namespace ColorCombination
             return chains;
         }
 
-        private void Recurse(List<List<Chip>> chains, List<Chip> remainingChips, List<Chip> possibleChain)
+        private void Recurse(List<ChipChain> chains, List<Chip> remainingChips, ChipChain possibleChain)
         {
             List<Chip> nextChips = remainingChips.Where(c => c.Left == possibleChain.Last().Right).ToList();
             foreach (Chip nextChip in nextChips)
             {
                 List<Chip> proxyRemainingChips = new List<Chip>(remainingChips);
-                List<Chip> proxyPossibleChain = new List<Chip>(possibleChain);
+                ChipChain proxyPossibleChain = new ChipChain(possibleChain);
 
                 proxyRemainingChips.Remove(nextChip);
                 proxyPossibleChain.Add(nextChip);

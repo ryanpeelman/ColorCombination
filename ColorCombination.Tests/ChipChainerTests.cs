@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ColorCombination.Data.Entities;
 using ColorCombination.Data.Enumerations;
+using ColorCombination.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ColorCombination.Tests
@@ -18,9 +19,9 @@ namespace ColorCombination.Tests
                 new Chip(SecurityColor.Red, SecurityColor.Yellow)
             };
 
-            ChipChainer chainer = new ChipChainer();
+            ChipChainBuilder chainer = new ChipChainBuilder();
 
-            List<List<Chip>> result = chainer.GetChains(firstChip, remainingChips);
+            List<ChipChain> result = chainer.GetChains(firstChip, remainingChips);
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Count == 0);
@@ -32,9 +33,9 @@ namespace ColorCombination.Tests
             Chip firstChip = new Chip(SecurityColor.Blue, SecurityColor.Green);
             List<Chip> remainingChips = new List<Chip>();
 
-            ChipChainer chainer = new ChipChainer();
+            ChipChainBuilder chainer = new ChipChainBuilder();
 
-            List<List<Chip>> result = chainer.GetChains(firstChip, remainingChips);
+            List<ChipChain> result = chainer.GetChains(firstChip, remainingChips);
 
             Assert.IsTrue(result.Count == 1);
         }
@@ -45,9 +46,9 @@ namespace ColorCombination.Tests
             Chip firstChip = new Chip(SecurityColor.Blue, SecurityColor.Green);
             List<Chip> remainingChips = new List<Chip>();
 
-            ChipChainer chainer = new ChipChainer();
+            ChipChainBuilder chainer = new ChipChainBuilder();
 
-            List<List<Chip>> result = chainer.GetChains(firstChip, remainingChips);
+            List<ChipChain> result = chainer.GetChains(firstChip, remainingChips);
             List<Chip> firstChain = result[0];
 
             Assert.AreEqual(firstChip, firstChain[0]);
@@ -60,9 +61,9 @@ namespace ColorCombination.Tests
             Chip secondChip = new Chip(SecurityColor.Orange, SecurityColor.Purple);
             List<Chip> remainingChips = new List<Chip>() { secondChip };
 
-            ChipChainer chainer = new ChipChainer();
+            ChipChainBuilder chainer = new ChipChainBuilder();
 
-            List<List<Chip>> result = chainer.GetChains(firstChip, remainingChips);
+            List<ChipChain> result = chainer.GetChains(firstChip, remainingChips);
 
             Assert.IsTrue(result.Count == 0);
         }
@@ -74,9 +75,9 @@ namespace ColorCombination.Tests
             Chip secondChip = new Chip(SecurityColor.Green, SecurityColor.Purple);
             List<Chip> remainingChips = new List<Chip>() { secondChip };
 
-            ChipChainer chainer = new ChipChainer();
+            ChipChainBuilder chainer = new ChipChainBuilder();
 
-            List<List<Chip>> result = chainer.GetChains(firstChip, remainingChips);
+            List<ChipChain> result = chainer.GetChains(firstChip, remainingChips);
 
             Assert.IsTrue(result.Count == 1);
         }
@@ -88,9 +89,9 @@ namespace ColorCombination.Tests
             Chip secondChip = new Chip(SecurityColor.Green, SecurityColor.Purple);
             List<Chip> remainingChips = new List<Chip>() { secondChip };
 
-            ChipChainer chainer = new ChipChainer();
+            ChipChainBuilder chainer = new ChipChainBuilder();
 
-            List<List<Chip>> result = chainer.GetChains(firstChip, remainingChips);
+            List<ChipChain> result = chainer.GetChains(firstChip, remainingChips);
             List<Chip> firstChain = result[0];
 
             Assert.AreEqual(firstChip, firstChain[0]);
@@ -107,9 +108,9 @@ namespace ColorCombination.Tests
             Chip fifthChip = new Chip(SecurityColor.Orange, SecurityColor.Green);
             List<Chip> remainingChips = new List<Chip>() { secondChip, thirdChip, fourthChip, fifthChip };
 
-            ChipChainer chainer = new ChipChainer();
+            ChipChainBuilder chainer = new ChipChainBuilder();
 
-            List<List<Chip>> result = chainer.GetChains(firstChip, remainingChips);
+            List<ChipChain> result = chainer.GetChains(firstChip, remainingChips);
 
             Assert.IsTrue(result.Count == 2);
         }
@@ -124,9 +125,9 @@ namespace ColorCombination.Tests
             Chip fifthChip = new Chip(SecurityColor.Orange, SecurityColor.Green);
             List<Chip> remainingChips = new List<Chip>() { secondChip, thirdChip, fourthChip, fifthChip };
 
-            ChipChainer chainer = new ChipChainer();
+            ChipChainBuilder chainer = new ChipChainBuilder();
 
-            List<List<Chip>> result = chainer.GetChains(firstChip, remainingChips);
+            List<ChipChain> result = chainer.GetChains(firstChip, remainingChips);
 
             List<Chip> firstChain = result[0];
             Assert.AreEqual(firstChip, firstChain[0]);

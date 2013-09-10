@@ -60,6 +60,10 @@
       <Project>{f5516bed-7f3b-4a4f-97ee-cfe4df5b332c}</Project>
       <Name>ColorCombination.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ColorCombination.Services\ColorCombination.Services.csproj">
+      <Project>{4d721b60-ab5c-4b68-8f59-cb0f45f316b0}</Project>
+      <Name>ColorCombination.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ColorCombination\ColorCombination.csproj">
       <Project>{51b72e9a-f0c9-44f2-9ba1-9bbc8cd4b8fb}</Project>
       <Name>ColorCombination</Name>

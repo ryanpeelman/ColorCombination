@@ -20,7 +20,7 @@ namespace ColorCombination
 
             foreach (SecuritySystemDataScenario scenario in scenarios)
             {
-                Console.Write(scenario.GetType().Name + ":  ");
+                Console.WriteLine(scenario.GetType().Name + ":  ");
 
                 SecuritySystem securitySystem = new SecuritySystem(scenario.BeginningMarkerColor, scenario.EndMarkerColor);
 
@@ -32,6 +32,8 @@ namespace ColorCombination
                 {
                     Console.WriteLine("Cannot unlock master panel");
                 }
+
+                Console.WriteLine();
             }
 
             Console.ReadLine();

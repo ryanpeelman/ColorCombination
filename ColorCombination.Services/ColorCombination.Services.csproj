@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{51B72E9A-F0C9-44F2-9BA1-9BBC8CD4B8FB}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{4D721B60-AB5C-4B68-8F59-CB0F45F316B0}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ColorCombination</RootNamespace>
-    <AssemblyName>ColorCombination</AssemblyName>
+    <RootNamespace>ColorCombination.Services</RootNamespace>
+    <AssemblyName>ColorCombination.Services</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,21 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="ChipChainBuilder.cs" />
+    <Compile Include="ChipChain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SecuritySystem.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ColorCombination.Data\ColorCombination.Data.csproj">
       <Project>{f5516bed-7f3b-4a4f-97ee-cfe4df5b332c}</Project>
       <Name>ColorCombination.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ColorCombination.Services\ColorCombination.Services.csproj">
-      <Project>{4d721b60-ab5c-4b68-8f59-cb0f45f316b0}</Project>
-      <Name>ColorCombination.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

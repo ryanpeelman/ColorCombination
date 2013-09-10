@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ColorCombination.Data.Entities;
 using ColorCombination.Data.Enumerations;
+using ColorCombination.Services;
 
 namespace ColorCombination
 {
@@ -32,7 +33,7 @@ namespace ColorCombination
             if (!chips.Any(x => x.Right == _endMarkerColor))
                 return false;
 
-            ChipChainer chainer = new ChipChainer();
+            ChipChainBuilder chainer = new ChipChainBuilder();
 
             List<List<Chip>> chains = new List<List<Chip>>();
             foreach (Chip validHeadChip in chips.Where(c => c.Left == _beginningMarkerColor))
@@ -40,7 +41,7 @@ namespace ColorCombination
                 List<Chip> proxyChips = new List<Chip>(chips);
                 proxyChips.Remove(validHeadChip);
 
-                List<List<Chip>> pchains = chainer.GetChains(validHeadChip, proxyChips);
+                List<ChipChain> pchains = chainer.GetChains(validHeadChip, proxyChips);
                 pchains.ForEach(p => chains.Add(p));
             }
 
