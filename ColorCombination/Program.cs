@@ -11,17 +11,27 @@ namespace ColorCombination
     {
         public static void Main(string[] args)
         {
-            SecuritySystemDataScenario dataScenario = new Example1DataScenario();
-
-            SecuritySystem securitySystem = new SecuritySystem(dataScenario.LeftMarker, dataScenario.RightMarker);
-
-            if (securitySystem.CanBeUnlocked(dataScenario.Chips))
+            List<SecuritySystemDataScenario> scenarios = new List<SecuritySystemDataScenario>()
             {
-                Console.WriteLine("UNLOCKED!");
-            }
-            else 
+                new Example1DataScenario(), 
+                new Example2DataScenario(), 
+                new Example3DataScenario()
+            };
+
+            foreach (SecuritySystemDataScenario scenario in scenarios)
             {
-                Console.WriteLine("Cannot unlock master panel");
+                Console.Write(scenario.GetType().Name + ":  ");
+
+                SecuritySystem securitySystem = new SecuritySystem(scenario.LeftMarker, scenario.RightMarker);
+
+                if (securitySystem.CanBeUnlocked(scenario.Chips))
+                {
+                    Console.WriteLine(securitySystem.UnlockSequence);
+                }
+                else
+                {
+                    Console.WriteLine("Cannot unlock master panel");
+                }
             }
 
             Console.ReadLine();

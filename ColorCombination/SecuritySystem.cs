@@ -12,6 +12,8 @@ namespace ColorCombination
         private Marker _leftMarker;
         private Marker _rightMarker;
 
+        public string UnlockSequence { get; private set; }
+
         public SecuritySystem(Marker leftMarker, Marker rightMarker)
         {
             _leftMarker = leftMarker;
@@ -32,9 +34,30 @@ namespace ColorCombination
             if (!chips.Any(x => x.Right == _rightMarker.Color))
                 return false;
 
+            ChipChainer chainer = new ChipChainer();
 
-            
-            return true;
+            List<List<Chip>> chains = new List<List<Chip>>();
+            foreach (Chip validHeadChip in chips.Where(c => c.Left == _leftMarker.Color))
+            {
+                List<Chip> proxyChips = new List<Chip>(chips);
+                proxyChips.Remove(validHeadChip);
+
+                List<List<Chip>> pchains = chainer.GetChains(validHeadChip, proxyChips);
+                pchains.ForEach(p => chains.Add(p));
+            }
+
+            List<Chip> chipSequence = chains.LastOrDefault(x => x.Last().Right == _rightMarker.Color);
+            if (chipSequence != null)
+            {
+                StringBuilder builder = new StringBuilder();
+                foreach (Chip chip in chipSequence)
+                {
+                    builder.AppendLine(chip.Left + ", " + chip.Right);
+                }
+                UnlockSequence = builder.ToString();
+            }
+
+            return chipSequence != null;            
         }
     }
 }
