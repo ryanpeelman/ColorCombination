@@ -6,14 +6,14 @@ namespace ColorCombination.Data.Scenarios
 {
     public class Example1DataScenario : SecuritySystemDataScenario
     {
-        public Marker LeftMarker
+        public SecurityColor BeginningMarkerColor
         {
-            get { return new Marker(SecurityColor.Blue); }
+            get { return SecurityColor.Blue; }
         }
 
-        public Marker RightMarker
+        public SecurityColor EndMarkerColor
         {
-            get { return new Marker(SecurityColor.Green); }
+            get { return SecurityColor.Green; }
         }
 
         public List<Chip> Chips

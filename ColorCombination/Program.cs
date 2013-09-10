@@ -22,7 +22,7 @@ namespace ColorCombination
             {
                 Console.Write(scenario.GetType().Name + ":  ");
 
-                SecuritySystem securitySystem = new SecuritySystem(scenario.LeftMarker, scenario.RightMarker);
+                SecuritySystem securitySystem = new SecuritySystem(scenario.BeginningMarkerColor, scenario.EndMarkerColor);
 
                 if (securitySystem.CanBeUnlocked(scenario.Chips))
                 {

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using ColorCombination.Data.Entities;
+using ColorCombination.Data.Enumerations;
 
 namespace ColorCombination.Data.Scenarios
 {
     public interface SecuritySystemDataScenario
     {
-        Marker LeftMarker { get; }
-        Marker RightMarker { get; }
+        SecurityColor BeginningMarkerColor { get; }
+        SecurityColor EndMarkerColor { get; }
         List<Chip> Chips { get; }
     }
 }
